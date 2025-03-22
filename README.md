@@ -2,7 +2,11 @@
 
 A real-time, interactive visualization tool for demonstrating different load balancing algorithms in action. Built with Three.js and modern JavaScript.
 
-![Load Balancer Simulator](public/screenshot.png)
+
+
+https://github.com/user-attachments/assets/c8b2648c-db57-45e2-a10b-c5ef34700da4
+
+
 
 ## What is a Load Balancer?
 
