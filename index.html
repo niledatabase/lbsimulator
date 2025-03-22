@@ -1,0 +1,171 @@
+<!-- File: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Balancer Algorithms</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: #0a0a0a;
+      }
+      .main-title {
+        position: fixed;
+        top: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        margin: 0;
+      }
+      .controls-section {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+      }
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 6px;
+      }
+      .control-label {
+        font-size: 14px;
+        color: white;
+        opacity: 0.9;
+        margin-bottom: 2px;
+      }
+      .control-value {
+        font-size: 14px;
+        color: white;
+        opacity: 0.8;
+      }
+      .request-types {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-top: 5px;
+      }
+      .request-type {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: white;
+        font-size: 12px;
+      }
+      .color-box {
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        width: calc(100vw - 40px);
+        height: calc(100vh - 180px);  /* Adjusted for controls */
+        gap: 20px;
+        background: #1a1a1a;
+        margin: 160px 20px 20px 20px;  /* Adjusted top margin */
+      }
+      .simulation-container {
+        position: relative;
+        background: #000000;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .simulation-title {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        z-index: 100;
+      }
+      button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        background: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      button.running {
+        background: #FF6B6B;
+      }
+      input[type="range"] {
+        width: 150px;
+      }
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="main-title">Load Balancer Algorithms</h1>
+    <div class="controls-section">
+      <div class="control-group" style="flex-direction: row; gap: 10px;">
+        <button id="toggleBtn">Start</button>
+        <button id="resetBtn" style="background: #666;">Reset</button>
+      </div>
+      <div class="control-group">
+        <div class="control-label">Request Rate (req/s)</div>
+        <input type="range" id="rateControl" min="0.1" max="1000" step="1" value="1">
+        <span id="rateValue" class="control-value">1.0</span>
+      </div>
+      <div class="control-group">
+        <div class="control-label">Run for (seconds)</div>
+        <input type="number" id="runTimeControl" min="1" max="3600" step="1" value="60" style="width: 80px; padding: 4px; border-radius: 4px; background: #333; color: white; border: 1px solid #555;">
+        <span id="timeLeftValue" class="control-value" style="min-width: 60px;">60s left</span>
+      </div>
+      <div class="control-group">
+        <div class="control-label">Number of Servers</div>
+        <input type="range" id="serverControl" min="2" max="20" step="1" value="4">
+        <span id="serverValue" class="control-value">4</span>
+      </div>
+      <div class="control-group">
+        <div class="control-label">Algorithm</div>
+        <select id="algorithmSelect" style="padding: 5px; border-radius: 4px; background: #333; color: white; border: 1px solid #555;">
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="control-label">Request Types (CPU/Memory)</div>
+        <div id="requestTypes" class="request-types"></div>
+      </div>
+    </div>
+    <div class="grid-container" style="grid-template-columns: 1fr;">
+      <div id="sim1" class="simulation-container">
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
